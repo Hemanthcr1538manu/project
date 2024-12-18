@@ -14,7 +14,7 @@ window = tk.Tk()
 window.title("FAMS-Face Recognition Based Attendance Management System")
 
 window.geometry('1280x720')
-window.configure(background='grey80')
+window.configure(background='white')
 
 # GUI for manually fill attendance
 
@@ -38,7 +38,7 @@ def manually_fill():
         ec.title('Warning!!')
         ec.configure(background='snow')
         Label(ec, text='Please enter your subject name!!!', fg='red',
-              bg='white', font=('times', 16, ' bold ')).pack()
+              bg='white', font=('times', 14, ' bold ')).pack()
         Button(ec, text='OK', command=ec_delete, fg="black", bg="lawn green", width=9, height=1, activebackground="Red",
                font=('times', 15, ' bold ')).place(x=90, y=50)
 
@@ -91,7 +91,7 @@ def manually_fill():
             # MFW.iconbitmap('AMS.ico')
             MFW.title("Manually attendance of " + str(subb))
             MFW.geometry('880x470')
-            MFW.configure(background='grey80')
+            MFW.configure(background='white')
 
             def del_errsc2():
                 errsc2.destroy()
@@ -114,11 +114,11 @@ def manually_fill():
                         return False
                 return True
 
-            ENR = tk.Label(MFW, text="Enter Enrollment", width=15, height=2, fg="black", bg="grey",
+            ENR = tk.Label(MFW, text="Enter Enrollment", width=15, height=2, fg="black", bg="#FFDAB9",
                            font=('times', 15))
             ENR.place(x=30, y=100)
 
-            STU_NAME = tk.Label(MFW, text="Enter Student name", width=15, height=2, fg="black", bg="grey",
+            STU_NAME = tk.Label(MFW, text="Enter Student name", width=15, height=2, fg="black", bg="#FFDAB9",
                                 font=('times', 15))
             STU_NAME.place(x=30, y=200)
 
@@ -165,7 +165,7 @@ def manually_fill():
             def create_csv():
                 import csv
                 cursor.execute("select * from " + DB_table_name + ";")
-                csv_name = 'C:/Users/Pragya singh/PycharmProjects/Attendace_management_system/Attendance/Manually Attendance/'+DB_table_name+'.csv'
+                csv_name = 'C:/Users/Hemanth CR/OneDrive/Desktop/project/Face-Recognition-Attendance-System/Attendance/Manually Attendance/'+DB_table_name+'.csv'
                 with open(csv_name, "w") as csv_file:
                     csv_writer = csv.writer(csv_file)
                     csv_writer.writerow(
@@ -221,7 +221,7 @@ def manually_fill():
             def attf():
                 import subprocess
                 subprocess.Popen(
-                    r'explorer /select,"C:\Users\Pragya Singh\PycharmProjects\Attendace_management_system\Attendance\Manually Attendance\-------Check atttendance-------"')
+                    r'explorer /select,"C:\Users\Hemanth CR\OneDrive\Desktop\project\Face-Recognition-Attendance-System\Attendance\Manually Attendance\-------Check atttendance-------"')
 
             attf = tk.Button(MFW,  text="Check Sheets", command=attf, fg="white", bg="black",
                              width=12, height=1, activebackground="white", font=('times', 14, ' bold '))
@@ -336,7 +336,7 @@ def take_img():
             Date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
             Time = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
             row = [Enrollment, Name, Date, Time]
-            with open('StudentDetails\StudentDetails.csv', 'a+') as csvFile:
+            with open('StudentDetails/StudentDetails.csv', 'a+') as csvFile:
                 writer = csv.writer(csvFile, delimiter=',')
                 writer.writerow(row)
                 csvFile.close()
@@ -362,7 +362,7 @@ def subjectchoose():
             else:
                 recognizer = cv2.face.LBPHFaceRecognizer_create()  # cv2.createLBPHFaceRecognizer()
                 try:
-                    recognizer.read("TrainingImageLabel\Trainner.yml")
+                    recognizer.read("TrainingImageLabel/Trainner.yml")
                 except:
                     e = 'Model not found,Please train model'
                     Notifica.configure(
@@ -371,7 +371,7 @@ def subjectchoose():
 
                 harcascadePath = "haarcascade_frontalface_default.xml"
                 faceCascade = cv2.CascadeClassifier(harcascadePath)
-                df = pd.read_csv("StudentDetails\StudentDetails.csv")
+                df = pd.read_csv("StudentDetails/StudentDetails.csv")
                 cam = cv2.VideoCapture(0)
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 col_names = ['Enrollment', 'Name', 'Date', 'Time']
@@ -485,7 +485,7 @@ def subjectchoose():
                 root = tkinter.Tk()
                 root.title("Attendance of " + Subject)
                 root.configure(background='grey80')
-                cs = 'C:/Users/Pragya Singh/PycharmProjects/Attendace_management_system/' + fileName
+                cs = 'C:/Users/Hemanth CR/OneDrive/Desktop/project/Face-Recognition-Attendance-System/' + fileName
                 with open(cs, newline="") as file:
                     reader = csv.reader(file)
                     r = 0
@@ -514,7 +514,7 @@ def subjectchoose():
     def Attf():
         import subprocess
         subprocess.Popen(
-            r'explorer /select,"C:\Users\Pragya Singh\PycharmProjects\Attendace_management_system\Attendance\-------Check atttendance-------"')
+            r'explorer /select,"C:\Users\Hemanth CR\OneDrive\Desktop\project\Face-Recognition-Attendance-System\-------Check atttendance-------"')
 
     attf = tk.Button(windo,  text="Check Sheets", command=Attf, fg="white", bg="black",
                      width=12, height=1, activebackground="white", font=('times', 14, ' bold '))
@@ -545,8 +545,8 @@ def admin_panel():
         username = un_entr.get()
         password = pw_entr.get()
 
-        if username == 'pragya':
-            if password == 'pragya123':
+        if username == 'manu':
+            if password == 'manu@5':
                 win.destroy()
                 import csv
                 import tkinter
@@ -554,7 +554,7 @@ def admin_panel():
                 root.title("Student Details")
                 root.configure(background='grey80')
 
-                cs = 'C:/Users/Pragya Singh/PycharmProjects/Attendace_management_system/StudentDetails/StudentDetails.csv'
+                cs = 'C:/Users/Hemanth CR/OneDrive/Desktop/project/Face-Recognition-Attendance-System/StudentDetails/StudentDetails.csv'
                 with open(cs, newline="") as file:
                     reader = csv.reader(file)
                     r = 0
@@ -638,7 +638,7 @@ def trainimg():
 
     recognizer.train(faces, np.array(Id))
     try:
-        recognizer.save("TrainingImageLabel\Trainner.yml")
+        recognizer.save("TrainingImageLabel/Trainner.yml")
     except Exception as e:
         q = 'Please make "TrainingImageLabel" folder'
         Notification.configure(text=q, bg="SpringGreen3",
